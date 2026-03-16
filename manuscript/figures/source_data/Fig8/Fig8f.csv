@@ -1,0 +1,16 @@
+group,category,count,pct
+evading,t1_fdr,167,23.39
+evading,t1_nominal_only,61,8.54
+evading,t2_fdr,56,7.84
+evading,t2_nominal_only,25,3.5
+evading,t1_sig_t2_ns_fdr,10,1.4
+evading,t1_sig_t2_ns_nom_only,160,22.41
+evading,both_fdr,56,7.84
+triggering,t1_fdr,129,18.07
+triggering,t1_nominal_only,74,10.36
+triggering,t2_fdr,38,5.32
+triggering,t2_nominal_only,13,1.82
+triggering,t1_sig_t2_ns_fdr,11,1.54
+triggering,t1_sig_t2_ns_nom_only,162,22.69
+triggering,both_fdr,38,5.32
+non_sig,non_sig,260,36.41

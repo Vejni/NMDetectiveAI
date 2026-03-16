@@ -1,0 +1,52 @@
+# ── Data ──────────────────────────────────────────────────────────────────
+data/processed/
+data/external/
+data/interim/
+data/raw/annotations/
+data/raw/PTC/
+manuscript/supplementary/files/*TCGA*
+manuscript/supplementary/files/*GTEx*
+
+# ── Generated outputs ────────────────────────────────────────────────────
+reports/
+out/
+wandb/
+
+# ── Development / IDE ────────────────────────────────────────────────────
+.vscode/
+.github/
+trash/
+jobs/logs/
+jobs/tmp/
+.DS_Store
+
+# ── Python ───────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+*.manifest
+*.spec
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints
+
+# ── Environments ─────────────────────────────────────────────────────────
+.env
+.venv
+env/
+venv/
+
+# ── Editor swap files ────────────────────────────────────────────────────
+*.swp
+*.swo
+.git.old/
+.gitignore.old
