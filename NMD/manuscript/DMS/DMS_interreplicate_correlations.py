@@ -172,30 +172,41 @@ def plot_interreplicate_grid():
     for dataset_name, config in DATASETS.items():
         row, col = config['position']
         ax = axes[col]
-        
+
         # Load data
         df = load_dataset(dataset_name)
-        
+
         # Calculate pairwise correlations
         correlations = calculate_pairwise_correlations(df, config['fitness_cols'])
-        
+
         # Store data for this panel
         panel_rows = []
-        
+
+        # Overlay hexbin for all points in this dataset (all replicates pooled)
+        # Pool all fitness columns for all pairwise combinations
+        all_x = []
+        all_y = []
+        for corr in correlations:
+            all_x.extend(corr['x'])
+            all_y.extend(corr['y'])
+        if len(all_x) > 0:
+            hb = ax.hexbin(all_x, all_y, gridsize=60, cmap="Greys", bins='log', alpha=0.4, linewidths=0)
+
         # Plot each pairwise comparison
         for i, corr in enumerate(correlations):
             color = COLORS[i % len(COLORS)]
-            alpha = 0.3 if len(correlations) > 1 else 0.6
-            
+            alpha = 0.15 if len(correlations) > 1 else 0.3  # more transparent
+            s = 8  # smaller point size
+
             # Determine replicate numbers (1-indexed)
             rep1_num = corr['rep1'].split('fitness')[-1].split('_')[0]  # Extract number from 'fitness1_uncorr'
             rep2_num = corr['rep2'].split('fitness')[-1].split('_')[0]  # Extract number from 'fitness2_uncorr'
-            
-            # Scatter plot
+
+            # Scatter plot (over hexbin)
             ax.scatter(corr['x'], corr['y'], 
-                      c=color, alpha=alpha, s=20, 
+                      c=color, alpha=alpha, s=s, marker='.',
                       label=f"Repl. {rep1_num} × Repl. {rep2_num}: ρ = {corr['spearman_rho']:.3f}, R² = {corr['r_squared']:.3f}")
-            
+
             # Store results for summary table
             all_results.append({
                 'dataset': dataset_name,
@@ -206,7 +217,7 @@ def plot_interreplicate_grid():
                 'r_squared': corr['r_squared'],
                 'p_value': corr['p_value']
             })
-            
+
             # Store x-y data for this replicate pair
             for x_val, y_val in zip(corr['x'], corr['y']):
                 panel_rows.append({
@@ -214,34 +225,34 @@ def plot_interreplicate_grid():
                     'replicate_1_RNA_abundance': x_val,
                     'replicate_2_RNA_abundance': y_val
                 })
-        
+
         # Add diagonal line
         lims = [
             min(ax.get_xlim()[0], ax.get_ylim()[0]),
             max(ax.get_xlim()[1], ax.get_ylim()[1])
         ]
         ax.plot(lims, lims, 'k--', alpha=0.3, zorder=0, linewidth=1)
-        
+
         # Set equal aspect ratio
         ax.set_aspect('equal', adjustable='box')
-        
+
         # Labels and title
         ax.set_xlabel('Replicate 1 RNA abundance', fontsize=14, fontweight='bold')
         ax.set_ylabel('Replicate 2 RNA abundance', fontsize=14, fontweight='bold')
         ax.set_title(config['title'], fontsize=16, fontweight='bold')
-        
+
         # Legend
         ax.legend(loc='lower left', fontsize=12, framealpha=0.9)
-        
+
         # Grid
         ax.grid(alpha=0.3, linestyle=':')
-        
+
         # Tick label size
         ax.tick_params(axis='both', labelsize=12)
-        
+
         # Store panel data
         panel_data[dataset_name] = pd.DataFrame(panel_rows)
-        
+
         logger.info(f"  {dataset_name}: {len(correlations)} pairwise comparisons")
     
     plt.tight_layout()

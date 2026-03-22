@@ -59,8 +59,9 @@ def plot_qpcr_validation(data: pd.DataFrame):
     fig, ax = plt.subplots(figsize=FIGURE_SIZE)
 
     non_wt = data[data["WT_factor"] != "WT"]
-    wt = data[data["WT_factor"] == "WT"]
+    # wt = data[data["WT_factor"] == "WT"]
 
+    # Only plot non-WT points
     ax.scatter(
         non_wt["mean_delta_CT"],
         non_wt["DMS_fitness"],
@@ -70,27 +71,7 @@ def plot_qpcr_validation(data: pd.DataFrame):
         edgecolors="none",
         zorder=2,
     )
-    ax.scatter(
-        wt["mean_delta_CT"],
-        wt["DMS_fitness"],
-        color=WT_COLOR,
-        s=50,
-        alpha=1.0,
-        edgecolors="none",
-        zorder=3,
-    )
-
-    # "WT" label next to the WT point
-    if len(wt) > 0:
-        ax.text(
-            wt["mean_delta_CT"].values[0] + 0.08,
-            wt["DMS_fitness"].values[0],
-            "WT",
-            color=WT_COLOR,
-            fontsize=11,
-            fontweight="bold",
-            va="center",
-        )
+    # WT point and label are omitted
 
     # Linear regression line
     r, p = scipy_stats.pearsonr(data["mean_delta_CT"], data["DMS_fitness"])
