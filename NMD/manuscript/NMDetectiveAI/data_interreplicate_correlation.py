@@ -25,6 +25,7 @@ from pathlib import Path
 from NMD.config import RAW_DATA_DIR
 from NMD.manuscript.output import get_paths
 from NMD.data.preprocessing import (
+    apply_strict_val_expression_filter,
     create_rule_labels,
     impute_rna_halflife,
     apply_lenient_expression_filter,
