@@ -1,2 +1,1 @@
-manuscript/supplementary/files/*.bed filter=lfs diff=lfs merge=lfs -text
 manuscript/supplementary/files/*.bb filter=lfs diff=lfs merge=lfs -text
