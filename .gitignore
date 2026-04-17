@@ -6,6 +6,7 @@ data/raw/annotations/
 data/raw/PTC/
 manuscript/supplementary/files/*TCGA*
 manuscript/supplementary/files/*GTEx*
+manuscript/supplementary/files/predictions/
 
 # ── Generated outputs ────────────────────────────────────────────────────
 reports/

@@ -273,7 +273,7 @@ def generate_ptc_sequences(tr, stop_codon="TAG", gencode_version=GENCODE_VERSION
     elif stop_codon == "TAA":
         stop_codon_ohe = np.array([[0, 0, 0, 1], [1, 0, 0, 0], [1, 0, 0, 0]])  # T  # A
     elif stop_codon == "TGA":
-        stop_codon_ohe = np.array([[0, 0, 0, 1], [0, 1, 0, 0], [1, 0, 0, 0]])  # T  # G
+        stop_codon_ohe = np.array([[0, 0, 0, 1], [0, 0, 1, 0], [1, 0, 0, 0]])  # T  # G
     else:
         raise ValueError(f"Invalid stop codon: {stop_codon}. Must be TAG, TAA, or TGA.")
 
@@ -321,7 +321,7 @@ def generate_penultimate_exon_ptc_sequences(tr, stop_codon="TAG", gencode_versio
     elif stop_codon == "TAA":
         stop_codon_ohe = np.array([[0, 0, 0, 1], [1, 0, 0, 0], [1, 0, 0, 0]])  # T A A
     elif stop_codon == "TGA":
-        stop_codon_ohe = np.array([[0, 0, 0, 1], [0, 1, 0, 0], [1, 0, 0, 0]])  # T G A
+        stop_codon_ohe = np.array([[0, 0, 0, 1], [0, 0, 1, 0], [1, 0, 0, 0]])  # T G A
     else:
         raise ValueError(f"Invalid stop codon: {stop_codon}. Must be TAG, TAA, or TGA.")
 
@@ -395,7 +395,7 @@ def generate_all_ptc_sequences(tr, stop_codon="TAG", max_positions=None, gencode
     elif stop_codon == "TAA":
         stop_codon_ohe = np.array([[0, 0, 0, 1], [1, 0, 0, 0], [1, 0, 0, 0]])  # T A A
     elif stop_codon == "TGA":
-        stop_codon_ohe = np.array([[0, 0, 0, 1], [0, 1, 0, 0], [1, 0, 0, 0]])  # T G A
+        stop_codon_ohe = np.array([[0, 0, 0, 1], [0, 0, 1, 0], [1, 0, 0, 0]])  # T G A
     else:
         raise ValueError(f"Invalid stop codon: {stop_codon}. Must be TAG, TAA, or TGA.")
 
